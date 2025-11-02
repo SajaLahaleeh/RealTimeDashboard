@@ -1,5 +1,5 @@
 # Real-Time Analytics Dashboard
-## We choose Scenario #2 : Real-Time Analytics Dashboard
+## I choose Scenario #2 : Real-Time Analytics Dashboard
 We picked the Real-Time Dashboard project because it feels like a real-world problem we can learn a lot from. It lets us practice the main topics from our backend training in a single, practical project.
 
 ### Why?
