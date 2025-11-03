@@ -29,6 +29,7 @@ public void flushAggregatedMetricsToDB(){
         metrics.getAverageMemoryUsage()
         );
         //For now, just print the data (Showq will store it in DB later)
+        
     });
 }
 
