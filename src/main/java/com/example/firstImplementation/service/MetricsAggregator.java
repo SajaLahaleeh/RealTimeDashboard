@@ -15,7 +15,7 @@ import com.example.firstImplementation.model.ServerMetrics;
 public class MetricsAggregator {
 
     //In memory Storage
-    private final Map<String, AggregatedMetrics> aggregatedData = new ConcurrentHashMap<>();    
+    private final Map<Integer, AggregatedMetrics> aggregatedData = new ConcurrentHashMap<>();    
 
     // Add new metrics to the aggregator
     public void addMetrics(ServerMetrics metrics){
@@ -30,7 +30,7 @@ public class MetricsAggregator {
     }
 
     // Retrieve aggregated metrics for a specific server
-    public Map<String, AggregatedMetrics> getAll() {
+    public Map<Integer, AggregatedMetrics> getAll() {
         return aggregatedData;
     }
     // Get a snapshot as a list for DB flush or API response

@@ -1,20 +1,20 @@
 package com.example.firstImplementation.model;
 
 public class ServerMetrics {
-    private String serverId;
+    private int serverId;
     private double cpuUsage;    
     private double memoryUsage;
     private long timestamp;
 
 
-    public ServerMetrics(String serverId, double cpuUsage, double memoryUsage, long timestamp) {
+    public ServerMetrics(int serverId, double cpuUsage, double memoryUsage, long timestamp) {
         this.serverId = serverId;
         this.cpuUsage = cpuUsage;
         this.memoryUsage = memoryUsage;
         this.timestamp = timestamp;
 
     }
-    public String getServerId() {
+    public int getServerId() {
         return serverId;
     }
     public double getCpuUsage() {
@@ -23,7 +23,7 @@ public class ServerMetrics {
     public double getMemoryUsage() {
         return memoryUsage;
     }
-    public void setServerId(String serverId) {
+    public void setServerId(int serverId) {
         this.serverId = serverId;
     }
     public void setCpuUsage(double cpuUsage) {

@@ -23,7 +23,7 @@ public class MetricsStreamController {
 
     //SEE endpoint: push updated aggregated metrics to clients in real-time evry 1 second
     @GetMapping(value = "/metrics/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<Map<String,AggregatedMetrics>> stramAggregatedMetrics(){
+    public Flux<Map<Integer,AggregatedMetrics>> stramAggregatedMetrics(){
         return Flux.interval(Duration.ofSeconds(1))
                 .map(tick -> aggregator.getAll());
     }
