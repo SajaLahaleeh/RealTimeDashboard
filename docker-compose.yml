@@ -1,25 +1,59 @@
-version: '3.8'
+# version: '3.8'
 
+# services:
+#   db:
+#     image: postgres:15
+#     container_name: postgres-db
+#     environment:
+#       POSTGRES_DB: mydb
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - postgres-data:/var/lib/postgresql/data
+
+#   app:
+#     build: .
+#     container_name: springboot-app
+#     ports:
+#       - "8080:8080"
+#     depends_on:
+#       - db
+
+# volumes:
+#   postgres-data:
 services:
-  db:
+  backend1:
+    build: .
+    container_name: backend1
+    ports:
+      - "8080:8080"
+
+  backend2:
+    build: .
+    container_name: backend2
+    ports:
+      - "8081:8080"
+
+  envoy:
+    image: envoyproxy/envoy:v1.27.2
+    container_name: envoy
+    ports:
+      - "10000:10000"  # Envoy load balancer
+      - "9901:9901"    # Envoy admin interface
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+    depends_on:
+      - backend1
+      - backend2
+
+  postgres:
     image: postgres:15
-    container_name: postgres-db
+    container_name: postgres
     environment:
-      POSTGRES_DB: mydb
+      POSTGRES_DB: metricsdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-
-  app:
-    build: .
-    container_name: springboot-app
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
-
-volumes:
-  postgres-data:
