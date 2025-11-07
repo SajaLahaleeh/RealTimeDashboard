@@ -25,11 +25,10 @@ Even though we aren't building the front-end visual dashboard itself, we are bui
 - BellSoft Liberica JDK (https://bell-sw.com/pages/downloads/#jdk-21-lts)
 - install: VS Code then => install: Spring Boot tool, spring initialiser java support, and Spring Boot Extension Pack.
 
-For Runing the Spring Boot App:
-pre request: (jdk)
+For runing the First implementation Spring Boot App:
 
 ```bash
-.\mvnw.cmd spring-boot:run
+.\mvnw spring-boot:run "-Dstart-class=com.example.firstImplementation.FirstApproachClass"
 ```
 
 
