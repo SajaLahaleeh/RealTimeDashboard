@@ -1,7 +1,7 @@
 package com.example.firstImplementation.model;
 
 public class AggregatedMetrics {
-    private String serverId;
+    private int serverId;
     private double totalCpuUsage;
     private double totalMemoryUsage;
     private int count;
@@ -45,10 +45,10 @@ public class AggregatedMetrics {
         return count == 0 ? 0 : totalMemoryUsage / count;
     }
 
-    public String getServerId() {
+    public int getServerId() {
         return serverId;
     }
-    public void setServerId(String serverId) {
+    public void setServerId(int serverId) {
         this.serverId = serverId;
     }   
     public long getLastUpdated() {
