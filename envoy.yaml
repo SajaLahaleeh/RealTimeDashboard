@@ -1,0 +1,98 @@
+# static_resources:
+#   listeners:
+#     - name: listener_0
+#       address:
+#         socket_address:
+#           address: 0.0.0.0
+#           port_value: 10000   # Envoy listens on this port
+#       filter_chains:
+#         - filters:
+#             - name: envoy.filters.network.http_connection_manager
+#               typed_config:
+#                 "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+#                 stat_prefix: ingress_http
+#                 route_config:
+#                   name: local_route
+#                   virtual_hosts:
+#                     - name: backend
+#                       domains: ["*"]
+#                       routes:
+#                         - match:
+#                             prefix: "/"
+#                           route:
+#                             cluster: backend_service
+#                 http_filters:
+#                   - name: envoy.filters.http.router
+
+#   clusters:
+#     - name: backend_service
+#       connect_timeout: 0.25s
+#       type: strict_dns
+#       lb_policy: round_robin   # load balancing policy
+#       load_assignment:
+#         cluster_name: backend_service
+#         endpoints:
+#           - lb_endpoints:
+#               - endpoint:
+#                   address:
+#                     socket_address:
+#                       address: host.docker.internal  # if backend runs on host
+#                       port_value: 8080
+#               - endpoint:
+#                   address:
+#                     socket_address:
+#                       address: host.docker.internal
+#                       port_value: 8081
+
+static_resources:
+  listeners:
+    - name: listener_0
+      address:
+        socket_address:
+          address: 0.0.0.0
+          port_value: 10000
+      filter_chains:
+        - filters:
+            - name: envoy.filters.network.http_connection_manager
+              typed_config:
+                "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+                stat_prefix: ingress_http
+                route_config:
+                  name: local_route
+                  virtual_hosts:
+                    - name: backend
+                      domains: ["*"]
+                      routes:
+                        - match:
+                            prefix: "/"
+                          route:
+                            cluster: backend_service
+                http_filters:
+                  - name: envoy.filters.http.router
+
+clusters:
+  - name: backend_service
+    connect_timeout: 0.25s
+    type: strict_dns
+    lb_policy: round_robin
+    load_assignment:
+      cluster_name: backend_service
+      endpoints:
+        - lb_endpoints:
+            - endpoint:
+                address:
+                  socket_address:
+                    address: backend1
+                    port_value: 8080
+            - endpoint:
+                address:
+                  socket_address:
+                    address: backend2
+                    port_value: 8080
+
+admin:
+  access_log_path: /tmp/admin_access.log
+  address:
+    socket_address:
+      address: 0.0.0.0
+      port_value: 9901
